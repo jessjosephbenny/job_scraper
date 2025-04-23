@@ -24,7 +24,7 @@ jobs:
 
       - name: Run scraper
         run: |
-          python scraper.py
+          python scrape_linkedlin.py
 
       - name: Commit and push scraped data
         run: |
