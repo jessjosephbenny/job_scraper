@@ -1,0 +1,36 @@
+name: Web Scraper
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # Every day at 6AM UTC
+  workflow_dispatch: # Optional: allows manual trigger
+
+jobs:
+  run-scraper:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run scraper
+        run: |
+          python scraper.py
+
+      - name: Commit and push scraped data
+        run: |
+          git config user.name "jessjosephbenny"
+          git config user.email "jessjosephbenny@gmail.com"
+          git add data/*.pkl
+          git diff --cached --quiet || git commit -m "Add scraped data file"
+          git commit -m "Add scraped data file"
+          git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} HEAD:main
