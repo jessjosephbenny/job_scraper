@@ -98,6 +98,7 @@ for search_key in search_keys:
     postings = pd.concat([postings, job_postings], ignore_index=True)
 
 postings.to_csv('se_postings.csv')
+postings = pd.read_csv('se_postings.csv')
 
 """Extracting list from saved file"""
 
@@ -176,5 +177,5 @@ count_missing
 
 """Counting Missing"""
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-filename = f"data/scraped_{timestamp}.csv"
+filename = f"data/scraped_{timestamp}.pkl"
 postings_with_description.to_pickle(filename)
