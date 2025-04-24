@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import time
 import pandas as pd
-import datetime
+from datetime import datetime
 
 def change_domain(url):
   pattern = r"https://([a-z]+)\.linkedin\.com"
