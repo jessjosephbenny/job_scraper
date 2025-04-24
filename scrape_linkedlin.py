@@ -5,6 +5,13 @@ import time
 import pandas as pd
 import datetime
 
+def change_domain(url):
+  pattern = r"https://([a-z]+)\.linkedin\.com"
+  match = re.search(pattern, url)
+  if match:
+    converted_url = re.sub(pattern, f"https://www.linkedin.com", url)
+    return converted_url
+
 def remove_special_characters(text):
     text = text.replace('\n', ' ')
     text = ' '.join(text.split())
@@ -50,6 +57,8 @@ def get_job_postings(keyword, location, days):
       print(final_url)
       stop = True
     start = start+25
+    if start == 100:
+      stop = True
   return [pd.DataFrame(processed_posts), error_pages]
 
 """Function to Fetch Job Posting"""
@@ -140,13 +149,7 @@ postings_with_description.to_pickle('ml_job_descriptions.pkl')
 
 postings_with_description['id'] = postings_with_description['id'].astype(int)
 
-import re
-def change_domain(url):
-  pattern = r"https://([a-z]+)\.linkedin\.com"
-  match = re.search(pattern, url)
-  if match:
-    converted_url = re.sub(pattern, f"https://www.linkedin.com", url)
-    return converted_url
+print('Finding Missing')
 
 """Finding Missing"""
 
@@ -179,3 +182,4 @@ count_missing
 timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 filename = f"data/scraped_{timestamp}.pkl"
 postings_with_description.to_pickle(filename)
+print('Saved to File, Script Execution Completed')
