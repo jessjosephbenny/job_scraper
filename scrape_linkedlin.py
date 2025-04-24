@@ -57,8 +57,6 @@ def get_job_postings(keyword, location, days):
       print(final_url)
       stop = True
     start = start+25
-    if start == 25:
-      stop = True
   return [pd.DataFrame(processed_posts), error_pages]
 
 """Function to Fetch Job Posting"""
