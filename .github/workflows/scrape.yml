@@ -30,7 +30,7 @@ jobs:
         run: |
           git config user.name "jessjosephbenny"
           git config user.email "jessjosephbenny@gmail.com"
-          git add data
+          git add data/*
           git diff --cached --quiet || git commit -m "Add scraped data file"
           git commit -m "Add scraped data file"
           git push https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }} HEAD:main
