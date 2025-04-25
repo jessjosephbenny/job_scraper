@@ -101,10 +101,13 @@ locations = ['Ontario, Canada']
 postings = pd.DataFrame(columns=['Title', 'Company', 'url', 'Location', 'company_url'])
 for search_key in search_keys:
   for location in locations:
-    job_postings, error_posts = get_job_postings(search_key, location, 7)
+    job_postings, error_posts = get_job_postings(search_key, location, 2)
     postings = pd.concat([postings, job_postings], ignore_index=True)
 
+timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+filename = f"data/scraped_{timestamp}.csv"
 postings.to_csv('se_postings.csv')
+postings.to_csv(filename)
 postings = pd.read_csv('se_postings.csv')
 
 """Extracting list from saved file"""
