@@ -81,9 +81,9 @@ def get_job_description(url):
         for job_criteria in job_criteria_list:
           extracted_criteria[rms(job_criteria.h3.string)] = rms(job_criteria.span.string)
         job_desciption['criteria'] = extracted_criteria
-      if soup.find('section',class_="core-section-container") != None:
-        description_html = soup.find('section',class_="core-section-container")
-        description = soup.find('section',class_="core-section-container").strings
+      if soup.find('section',class_="decorated-job-posting__details") != None:
+        description_html = soup.find('section',class_="decorated-job-posting__details")
+        description = soup.find('section',class_="decorated-job-posting__details").strings
         sentences = []
         for s in description:
           sentences.append(rms(s))
